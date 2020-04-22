@@ -1,7 +1,7 @@
 ## Binaries
 
 Download here:
-[Check NOAA Outlook v1.0](/releases/Check_NOAA_Outlook_v1.0.zip)
+[Check NOAA Outlook v1.0](https://github.com/stumper66/Check_NOAA_Outlook/files/4513235/Check_NOAA_Outlook_v1.0.zip)
 
 ## Instructions
 
