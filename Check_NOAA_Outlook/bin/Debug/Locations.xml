@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="yes"?>
+<Settings>
+  <Locations>
+    <Id>0</Id>
+    <Coordinates>414, 381</Coordinates>
+    <Label>Arlington, TX</Label>
+    <Email_Recipients>someone@somewhere.local (Someone Smith);someone2@somewhere.local (Someone2 Smith)</Email_Recipients>
+    <Min_Severity>2</Min_Severity>
+	<MesoMap_Coordinates>292, 259</MesoMap_Coordinates>
+  </Locations>
+  <Locations>
+    <Id>1</Id>
+    <Coordinates>543, 197</Coordinates>
+    <Label>Chicago, IL</Label>
+    <Email_Recipients>someone@somewhere.local (Someone Smith)</Email_Recipients>
+	<Email_Recipients_BCC>someoneelse@somewhere.local (SomeoneElse Smith)</Email_Recipients_BCC>
+    <Min_Severity>2</Min_Severity>
+	<MesoMap_Coordinates>382, 137</MesoMap_Coordinates>
+  </Locations>
+  <Locations>
+    <Id>3</Id>
+    <Coordinates>80, 55</Coordinates>
+    <Label>Kirkland, WA</Label>
+    <Email_Recipients>someone@somewhere.local (Someone Smith)</Email_Recipients>
+    <Min_Severity>1</Min_Severity>
+    <Min_Severity_For_Picture>1</Min_Severity_For_Picture>
+	<MesoMap_Coordinates>117, 69</MesoMap_Coordinates>
+  </Locations>
+  <Locations>
+    <Id>4</Id>
+    <Coordinates>445, 437</Coordinates>
+    <Label>Houston, TX</Label>
+    <Email_Recipients>someone@somewhere.local (Someone Smith)</Email_Recipients>
+    <Min_Severity>2</Min_Severity>
+	<MesoMap_Coordinates>310, 296</MesoMap_Coordinates>
+  </Locations>
+</Settings>

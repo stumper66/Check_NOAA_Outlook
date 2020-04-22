@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="yes"?>
+<Settings>
+  <Results>
+    <Location_Id>0</Location_Id>
+    <Last_Check>2020-04-20T12:55:07.0421614Z</Last_Check>
+    <Last_Severities>1;1;3</Last_Severities>
+  </Results>
+  <Results>
+    <Location_Id>1</Location_Id>
+    <Last_Check>2020-04-20T12:55:07.058106Z</Last_Check>
+    <Last_Severities>1;0;0</Last_Severities>
+  </Results>
+  <Results>
+    <Location_Id>2</Location_Id>
+    <Last_Check>2020-04-20T12:55:07.2140199Z</Last_Check>
+    <Last_Severities>1;1;3</Last_Severities>
+  </Results>
+  <Results>
+    <Location_Id>3</Location_Id>
+    <Last_Check>2020-04-20T12:55:07.2140199Z</Last_Check>
+    <Last_Severities>0;0;0</Last_Severities>
+  </Results>
+  <Results>
+    <Location_Id>4</Location_Id>
+    <Last_Check>2020-04-20T12:55:07.3859201Z</Last_Check>
+    <Last_Severities>0;0;3</Last_Severities>
+  </Results>
+</Settings>
