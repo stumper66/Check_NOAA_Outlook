@@ -1,11 +1,12 @@
 # How to use Check_NOAA_Outlook
 
-There are 5 files required to be present:
+There are 6 files required to be present:
 
 Mode  | LastWriteDate | Time   | Length | Name   
 ---   | ---           | ---    | ---    | ---
 -a--- | 04/20/2020    | 08:06  | 37376  | Check_NOAA_Outlook.exe
 -a--- | 04/11/2020    | 17:58  | 1906   | Check_NOAA_Outlook.exe.config
+-a--- | 02/18/2017    | 22:50  | 8039   | cities.gif
 -a--- | 02/18/2017    | 22:53  | 13968  | legend.jpg
 -a--- | 04/20/2020    | 08:08  | 3734   | Locations.xml
 -a--- | 03/08/2017    | 19:26  | 276480 | log4net.dll
