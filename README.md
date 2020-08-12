@@ -1,7 +1,12 @@
 ## Binaries
 
-Download here:
-[Check NOAA Outlook v1.1](https://github.com/stumper66/Check_NOAA_Outlook/files/4513235/Check_NOAA_Outlook_v1.0.zip)
+Requirements:
+* A supported version of Windows, such as Server 2019 or Windows 10.
+* [Microsoft .Net Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+
+Name | Version | Notes | Size | Date
+---  | ---     | ---   | ---  | ---
+[Check NOAA Outlook](https://github.com/stumper66/Check_NOAA_Outlook/releases/download/v1.1/Check_NOAA_Outlook-v1.1.zip) | 1.1 | Windows | 12,579 KB | 08/12/2020
 
 ## Instructions
 
