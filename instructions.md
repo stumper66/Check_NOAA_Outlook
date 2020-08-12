@@ -1,17 +1,28 @@
+# Requirements
+* A supported version of Windows, such as Server 2019 or Windows 10.
+* [Microsoft.Net Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+* Internet connectivity for downloading NOAA outlooks and sending email.
+
 # How to use Check_NOAA_Outlook
 
-There are 6 files required to be present:
+There are 11 files and 1 directory required to be present:
 
 Mode  | LastWriteDate | Time   | Length | Name   
 ---   | ---           | ---    | ---    | ---
--a--- | 04/20/2020    | 08:06  | 37376  | Check_NOAA_Outlook.exe
--a--- | 04/11/2020    | 17:58  | 1906   | Check_NOAA_Outlook.exe.config
--a--- | 02/18/2017    | 22:50  | 8039   | cities.gif
--a--- | 02/18/2017    | 22:53  | 13968  | legend.jpg
--a--- | 04/20/2020    | 08:08  | 3734   | Locations.xml
--a--- | 03/08/2017    | 19:26  | 276480 | log4net.dll
+d---- |        07/15/2020 |  23:23 |             | runtimes
+-a--- |        08/12/2020 |  13:11 |          643| appsettings.json
+-a--- |        08/12/2020 |  12:44 |         2492| Check_NOAA_Outlook.deps.json
+-a--- |        08/12/2020 |  12:46 |        47616| Check_NOAA_Outlook.dll
+-a--- |        08/12/2020 |  12:46 |       169984| Check_NOAA_Outlook.exe
+-a--- |        08/12/2020 |  12:44 |          240| Check_NOAA_Outlook.runtimeconfig.dev.json
+-a--- |        08/12/2020 |  12:44 |          154| Check_NOAA_Outlook.runtimeconfig.json
+-a--- |        02/18/2017 |  22:50 |         8039| cities.gif
+-a--- |        02/18/2017 |  22:53 |        13968| legend.jpg
+-a--- |        08/12/2020 |  12:53 |         1147| Locations.json
+-a--- |        07/26/2020 |  14:46 |      1408208| Magick.NET.Core.dll
+-a--- |        07/26/2020 |  14:50 |       528592| Magick.NET-Q8-AnyCPU.dll
 
-First edit Check_NOAA_Outlook.exe.config and put in the proper values which is mostly email config.  Be sure to specify a proper SMTP host.
+First edit appsettings.json and put in the proper values which is mostly email config.  Be sure to specify a proper SMTP host.
 
 ![appconfig](/images/appconfig.PNG)
 
@@ -27,8 +38,8 @@ Next you'll need to edit locations.xml and fill in the following:
 
 Once the above files are configured, simply execute Check_NOAA_Outlook.exe as often as desired.  I recommend using a scheduled task to have it run every 5 minutes from 7am to 11pm.
 
-## Locations.xml example
-![locations.xml](/images/locationsxml.PNG)
+## Locations.json example
+![locations.PNG](/images/locations.PNG)
 
 ## Running The Program
 Simply execute the executable, ideally on a repeating schedule.
@@ -45,7 +56,7 @@ The file is saved in the project as 'map with cities.gif'.  Open this image with
 
 You'll need to use a separate set of coordinates for mesoscale discussions.  This image in the project as 'validmd.png'.  It is from: <https://www.spc.noaa.gov/products/md/>
 
-Once you have the coordinates from validmd.png, use them for 'MesoMap_Coordinates' in locations.xml
+Once you have the coordinates from validmd.png, use them for 'MesoMap_Coordinates' in locations.json
 
 [Day1]:https://www.spc.noaa.gov/products/outlook/day1otlk.html ("https://www.spc.noaa.gov/products/outlook/day1otlk.html")
 [Meso]:https://www.spc.noaa.gov/products/md/   "https://www.spc.noaa.gov/products/md/"

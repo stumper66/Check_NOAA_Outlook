@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Check_NOAA_Outlook", "Check_NOAA_Outlook\Check_NOAA_Outlook.csproj", "{A735D16F-D9B9-48CB-8AAA-56866C8DCFD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Check_NOAA_Outlook", "Check_NOAA_Outlook\Check_NOAA_Outlook.csproj", "{B607289B-2B63-41D3-A193-EAD422E4B5B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A735D16F-D9B9-48CB-8AAA-56866C8DCFD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A735D16F-D9B9-48CB-8AAA-56866C8DCFD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A735D16F-D9B9-48CB-8AAA-56866C8DCFD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A735D16F-D9B9-48CB-8AAA-56866C8DCFD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B607289B-2B63-41D3-A193-EAD422E4B5B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B607289B-2B63-41D3-A193-EAD422E4B5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B607289B-2B63-41D3-A193-EAD422E4B5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B607289B-2B63-41D3-A193-EAD422E4B5B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2215E5B3-9BDA-4012-8EBB-13AEDBEAF920}
 	EndGlobalSection
 EndGlobal

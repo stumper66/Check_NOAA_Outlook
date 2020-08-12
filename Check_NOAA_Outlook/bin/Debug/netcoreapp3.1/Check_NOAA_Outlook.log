@@ -1,0 +1,31 @@
+2020-08-12 14:28:25.861 [1] INFO - ------------------------------ Program starting.  Version 1.1.0.0 -----------------------------------------
+2020-08-12 14:28:26.028 [1] DEBUG - Downloading: http://www.spc.noaa.gov/products/outlook/day1otlk.html
+2020-08-12 14:28:26.867 [1] DEBUG - Downloading: http://www.spc.noaa.gov/products/outlook/day2otlk.html
+2020-08-12 14:28:27.062 [1] DEBUG - Downloading: http://www.spc.noaa.gov/products/outlook/day3otlk.html
+2020-08-12 14:28:27.301 [1] DEBUG - Downloading: https://www.spc.noaa.gov/products/md/
+2020-08-12 14:28:27.522 [1] INFO - No Mesoscale Discussions are currently in effect
+2020-08-12 14:28:27.522 [1] INFO - No meso discussions present
+2020-08-12 14:28:27.524 [1] DEBUG - Downloading: http://www.spc.noaa.gov/products/outlook/day1otlk_1630.gif
+2020-08-12 14:28:27.667 [1] DEBUG - Downloading: http://www.spc.noaa.gov/products/outlook/day2otlk_1730.gif
+2020-08-12 14:28:27.852 [1] DEBUG - Downloading: http://www.spc.noaa.gov/products/outlook/day3otlk_0730.gif
+2020-08-12 14:28:28.031 [1] DEBUG - Checking Arlington
+2020-08-12 14:28:28.055 [1] DEBUG - Day 1, Severity: TSTM
+2020-08-12 14:28:28.055 [1] DEBUG - Day 2, Severity: Nothing
+2020-08-12 14:28:28.055 [1] DEBUG - Day 3, Severity: TSTM
+2020-08-12 14:28:28.059 [1] DEBUG - HasPrev: True, HowSevere: 1, HighestSevFromPrev: 1, MinSev: 2, SevChangedFromPrev: False, MesoChanged: False, DayChanged: False
+2020-08-12 14:28:28.060 [1] DEBUG - Checking Chicago
+2020-08-12 14:28:28.060 [1] DEBUG - Day 1, Severity: Nothing
+2020-08-12 14:28:28.060 [1] DEBUG - Day 2, Severity: Nothing
+2020-08-12 14:28:28.060 [1] DEBUG - Day 3, Severity: Nothing
+2020-08-12 14:28:28.060 [1] DEBUG - HasPrev: True, HowSevere: 0, HighestSevFromPrev: 0, MinSev: 2, SevChangedFromPrev: False, MesoChanged: False, DayChanged: False
+2020-08-12 14:28:28.060 [1] DEBUG - Checking Kirkland
+2020-08-12 14:28:28.060 [1] DEBUG - Day 1, Severity: Nothing
+2020-08-12 14:28:28.060 [1] DEBUG - Day 2, Severity: Nothing
+2020-08-12 14:28:28.061 [1] DEBUG - Day 3, Severity: Nothing
+2020-08-12 14:28:28.061 [1] DEBUG - HasPrev: True, HowSevere: 0, HighestSevFromPrev: 0, MinSev: 1, SevChangedFromPrev: False, MesoChanged: False, DayChanged: False
+2020-08-12 14:28:28.061 [1] DEBUG - Checking Houston
+2020-08-12 14:28:28.061 [1] DEBUG - Day 1, Severity: TSTM
+2020-08-12 14:28:28.061 [1] DEBUG - Day 2, Severity: Nothing
+2020-08-12 14:28:28.061 [1] DEBUG - Day 3, Severity: TSTM
+2020-08-12 14:28:28.062 [1] DEBUG - HasPrev: True, HowSevere: 1, HighestSevFromPrev: 1, MinSev: 2, SevChangedFromPrev: False, MesoChanged: False, DayChanged: False
+2020-08-12 14:28:28.088 [1] INFO - Locations count: 4, locations in severe: 0, locations emailed: 0, mesos included: 0

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "j/6n3cNNkC8zEhIduiye98VMTnQBE9AgUYKxf7WFDWyGcZLtlmP/GU+GWJvtO8XYf2cXKoDEAxCExXKJTfH+NQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\stephen\\source\\repos\\Check_NOAA_Outlook\\Check_NOAA_Outlook\\Check_NOAA_Outlook.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\stephen\\.nuget\\packages\\magick.net-q8-anycpu\\7.21.1\\magick.net-q8-anycpu.7.21.1.nupkg.sha512",
+    "C:\\Users\\stephen\\.nuget\\packages\\magick.net.core\\4.1.0\\magick.net.core.4.1.0.nupkg.sha512",
+    "C:\\Users\\stephen\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.2\\microsoft.netcore.app.host.win-x64.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}

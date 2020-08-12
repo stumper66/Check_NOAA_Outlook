@@ -1,20 +1,46 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
+//using System.Drawing;
+using ImageMagick;
 
 namespace Check_NOAA_Outlook
 {
+    public class ComparisonAgainPrevResults
+    {
+        public bool SeverityChangedFromPrev;
+        public int HighestSev;
+        public bool DayChanged;
+
+    }
     public class LocationsInfo
     {
-        public Point Location, MesoMapLocation;
-        public string Label, EmailRecipients, EmailRecipients_BCC;
-        public int MinSeverity, LocationId, MinSevForPicture;
+        // serialized fields:
+        public string Coordinates { get; set; }
+        public string Label { get; set; }
+        public string Email_Recipients { get; set; }
+        public string Email_Recipients_BCC { get; set; }
+        public string MesoMap_Coordinates { get; set; }
+        public int Min_Severity { get; set; }
+        public int? Min_Severity_For_Picture { get; set; }
+
+        // fields not serialized:
+        public System.Drawing.Point Location, MesoMapLocation;
+        public string LocationId;
         public bool CheckExtended;
     }
 
+    public class TrackingInfo
+    {
+        public DateTime Last_Check { get; set; }
+        public string Last_Severities { get; set; }
+        public string Last_Mesos { get; set; }
+        public string Last_Severities2 { get; set; }
+        public DateTime? Last_Severities2_Time { get; set; }
+    }
     public enum MesoParseResult
     {
         Found_Mesos,
@@ -22,24 +48,52 @@ namespace Check_NOAA_Outlook
         Had_Error
     }
 
+    public class MyBooleanConverter : System.Text.Json.Serialization.JsonConverter<bool>
+    {
+        public override bool Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+        {
+            if (reader.TokenType == System.Text.Json.JsonTokenType.String)
+            {
+                string test = reader.GetString();
+                if (string.IsNullOrEmpty(test)) return false;
+                test = test.ToLower();
+
+                if (test == "0" || test == "false")
+                    return false;
+
+                if (test == "1" || test == "true")
+                    return true;
+            }
+            else if (reader.TokenType == System.Text.Json.JsonTokenType.True) return true;
+
+            return false;
+        }
+
+        public override void Write(System.Text.Json.Utf8JsonWriter writer, bool value, System.Text.Json.JsonSerializerOptions options)
+        {
+            writer.WriteBooleanValue(value);
+        }
+    }
+
     public class PreviousResultsInfo
     {
         public PreviousResultsInfo() { }
 
-        public PreviousResultsInfo(int LocationId)
+        public PreviousResultsInfo(string LocationId)
         {
             this.LocationId = LocationId;
         }
 
-        public int LocationId;
+        public string LocationId;
         public DateTime? LastCheckTime;
         public Dictionary<int, SeveritiesEnum> LastSeverities;
+        public Dictionary<int, SeveritiesEnum> Last2Severities;
+        public DateTime Last2SevsTime;
         public List<string> Mesos;
     }
-
     public class SevereCategoryValues
     {
-        public SevereCategoryValues(Bitmap bm, Bitmap cities)
+        public SevereCategoryValues(MagickImage bm, MagickImage cities)
         {
             this.bm = bm;
             this.cities = cities;
@@ -47,7 +101,7 @@ namespace Check_NOAA_Outlook
             InitializeStuff();
         }
 
-        public SevereCategoryValues(Bitmap bm, Bitmap cities, Bitmap day48_legend)
+        public SevereCategoryValues(MagickImage bm, MagickImage cities, MagickImage day48_legend)
         {
             this.bm = bm;
             this.cities = cities;
@@ -59,24 +113,26 @@ namespace Check_NOAA_Outlook
 
         public void InitializeStuff()
         {
-            Point[] Pts = new Point[] {
-                    new Point(590, 530), // TSTM
-                    new Point(670, 530), // MRGL
-                    new Point(750, 530), // SLGT
-                    new Point(590, 547), // ENH
-                    new Point(670, 547), // MDT
-                    new Point(750, 547)  // HIGH
+            System.Drawing.Point[] Pts = new System.Drawing.Point[] {
+                    new System.Drawing.Point(590, 530), // TSTM
+                    new System.Drawing.Point(670, 530), // MRGL
+                    new System.Drawing.Point(750, 530), // SLGT
+                    new System.Drawing.Point(590, 547), // ENH
+                    new System.Drawing.Point(670, 547), // MDT
+                    new System.Drawing.Point(750, 547)  // HIGH
                 };
 
-            TSTM = bm.GetPixel(Pts[0].X, Pts[0].Y);
-            MRGL = bm.GetPixel(Pts[1].X, Pts[1].Y);
-            SLGT = bm.GetPixel(Pts[2].X, Pts[2].Y);
-            ENH = bm.GetPixel(Pts[3].X, Pts[3].Y);
-            MDT = bm.GetPixel(Pts[4].X, Pts[4].Y);
-            HIGH = bm.GetPixel(Pts[5].X, Pts[5].Y);
-            Nothing = Color.FromArgb(255, 255, 255, 255);
 
-            ColorToSeverity = new Dictionary<Color, SeveritiesEnum>();
+            IPixelCollection<byte> Pixels = bm.GetPixels();
+            TSTM = new MagickColor(Pixels[Pts[0].X, Pts[0].Y].ToColor());
+            MRGL = new MagickColor(Pixels[Pts[1].X, Pts[1].Y].ToColor());
+            SLGT = new MagickColor(Pixels[Pts[2].X, Pts[2].Y].ToColor());
+            ENH = new MagickColor(Pixels[Pts[3].X, Pts[3].Y].ToColor());
+            MDT = new MagickColor(Pixels[Pts[4].X, Pts[4].Y].ToColor());
+            HIGH = new MagickColor(Pixels[Pts[5].X, Pts[5].Y].ToColor());
+            Nothing = new MagickColor(255, 255, 255, 255);
+
+            ColorToSeverity = new Dictionary<MagickColor, SeveritiesEnum>();
             ColorToSeverity.Add(TSTM, SeveritiesEnum.TSTM);
             ColorToSeverity.Add(MRGL, SeveritiesEnum.MGRL);
             ColorToSeverity.Add(SLGT, SeveritiesEnum.SLGT);
@@ -84,8 +140,8 @@ namespace Check_NOAA_Outlook
             ColorToSeverity.Add(MDT, SeveritiesEnum.MDT);
             ColorToSeverity.Add(HIGH, SeveritiesEnum.HIGH);
             ColorToSeverity.Add(Nothing, SeveritiesEnum.Nothing);
-            ColorToSeverity.Add(bm.GetPixel(20, 20), SeveritiesEnum.Water);
-            ColorToSeverity.Add(bm.GetPixel(308, 36), SeveritiesEnum.Outside_US);
+            ColorToSeverity.Add(new MagickColor(Pixels[20, 20].ToColor()), SeveritiesEnum.Water);
+            ColorToSeverity.Add(new MagickColor(Pixels[308, 36].ToColor()), SeveritiesEnum.Outside_US);
 
             if (this.IsDay48)
             {
@@ -93,14 +149,14 @@ namespace Check_NOAA_Outlook
             }
         }
 
-        public Dictionary<Color, SeveritiesEnum> ColorToSeverity, m_ColorToSeverity2;
-        public Color TSTM, MRGL, SLGT;
-        public Color ENH, MDT, HIGH, Nothing;
-        public Bitmap bm, cities, day48_legend;
+        public Dictionary<MagickColor, SeveritiesEnum> ColorToSeverity, m_ColorToSeverity2;
+        public MagickColor TSTM, MRGL, SLGT;
+        public MagickColor ENH, MDT, HIGH, Nothing;
+        public MagickImage bm, cities, day48_legend;
         public bool IsDay48;
         private const double ColorTolerance = 5.0D;
 
-        public SeveritiesEnum WhatSeverityIsThis(Point p, bool IsDay48)
+        public SeveritiesEnum WhatSeverityIsThis(System.Drawing.Point p, bool IsDay48)
         {
             if (IsDay48)
             {
@@ -124,6 +180,7 @@ namespace Check_NOAA_Outlook
             //
             //       X       X
 
+            IPixelCollection<byte> Pixels = bm.GetPixels();
             for (int i = 0; i < 5; i++)
             {
                 switch (i)
@@ -138,9 +195,11 @@ namespace Check_NOAA_Outlook
                         UseX += 3; UseY += 3; break;
                 }
 
-                Color c = bm.GetPixel(UseX, UseY);
+                // TSTM = new MagickColor(Pixels[Pts[0].X, Pts[0].Y].ToColor());
+                MagickColor c = new MagickColor(Pixels[UseX, UseY].ToColor());
+                //Color c = bm.GetPixel(UseX, UseY);
 
-                foreach (Color co in ColorToSeverity.Keys)
+                foreach (MagickColor co in ColorToSeverity.Keys)
                 {
                     double ColorDiff = ColourDistance(c, co);
                     if (ColorDiff <= ColorTolerance && ColorToSeverity[co] > HighestSev)
@@ -151,14 +210,14 @@ namespace Check_NOAA_Outlook
             return HighestSev;
         }
 
-        public Bitmap GetCropOfMyArea(Point p)
+        public MagickImage GetCropOfMyArea(System.Drawing.Point p)
         {
             const int XOffset = 150;
             const int YOffset = 150;
 
-            Bitmap MyClone = CombineCities(this.bm);
+            MagickImage MyClone = CombineCities(this.bm);
             //Bitmap MyClone = new Bitmap(this.bm);
-            Rectangle rect = new Rectangle(p.X - XOffset, p.Y - YOffset, XOffset * 2, YOffset * 2);
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(p.X - XOffset, p.Y - YOffset, XOffset * 2, YOffset * 2);
 
             if (rect.X < 0) rect.X -= rect.X;
             if (rect.Y < 0) rect.Y -= rect.Y;
@@ -173,22 +232,27 @@ namespace Check_NOAA_Outlook
                 rect.Y -= Offset;
             }
 
-            Bitmap Crop = MyClone.Clone(rect,
-                System.Drawing.Imaging.PixelFormat.DontCare);
+            MagickGeometry g = new MagickGeometry(rect.X, rect.Y, rect.Width, rect.Height);
+            MagickImage Crop = new MagickImage(MyClone.Clone(g));
+            //MagickImage Crop = MyClone.Clone(rect,
+            //    System.Drawing.Imaging.PixelFormat.DontCare);
 
             return Crop;
         }
 
-        public Bitmap CombineCities(Bitmap OutlookBitmap)
+        public MagickImage CombineCities(MagickImage OutlookBitmap)
         {
 
-            using (Image i = new Bitmap(OutlookBitmap))
-            {
+            //using (MagickImage i = OutlookBitmap.Clone())
+            //{
+            MagickImage i = new MagickImage(OutlookBitmap.Clone());
                 float maxWidth = i.Width;
                 float maxHeight = i.Height;
 
-                float imageWidth = i.PhysicalDimension.Width;
-                float imageHeight = i.PhysicalDimension.Height;
+                //float imageWidth = i.PhysicalDimension.Width;
+                //float imageHeight = i.PhysicalDimension.Height;
+                float imageWidth = i.Width;
+                float imageHeight = i.Height;
                 float percentage = maxWidth / imageWidth;
                 float newWidth = imageWidth * percentage;
                 float newHeight = imageHeight * percentage;
@@ -201,36 +265,51 @@ namespace Check_NOAA_Outlook
                     newHeight = newHeight * percentage;
                 }
 
-                using (Bitmap b = new Bitmap((int)newWidth, (int)newHeight))
-                {
-                    using (Graphics g = Graphics.FromImage(b))
-                    {
-                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                        g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-                        g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-                        g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            //using (Image b = new Bitmap((int)newWidth, (int)newHeight))
+            //{
+            //GraphicsOptions opts = new GraphicsOptions();
+            //opts.AlphaCompositionMode = PixelAlphaCompositionMode.SrcOver;
 
-                        g.DrawImage(i, new Rectangle(0, 0, b.Width, b.Height));
+            //i.Mutate(x => x.DrawImage(this.cities, opts));
+            //return i;
+            //using (MagickImageCollection col = new MagickImageCollection())
+            //{
+            MagickImageCollection col = new MagickImageCollection();
+            col.Add(i);
+            col.Add(cities);
+            return new MagickImage(col.Mosaic());
+            //}
+            
 
-                        using (Image j = new Bitmap(this.cities))
-                        {
-                            g.DrawImage(j, new Rectangle(0, 0, j.Width, j.Height));
+                    //using (Graphics g = Graphics.FromImage(b))
+                    //{
+                    //    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    //    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    //    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                    //    g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    //    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
-                        }
+                    //    g.DrawImage(i, new Rectangle(0, 0, b.Width, b.Height));
 
-                        Bitmap newImage = Image.FromHbitmap(b.GetHbitmap());
-                        return newImage;
-                        //string file3 = @"C:\Users\stephen\test\test.gif";
-                        //newImage.Save(file3, System.Drawing.Imaging.ImageFormat.Gif);
-                    }
-                }
+                    //    using (Image j = new Bitmap(this.cities))
+                    //    {
+                    //        g.DrawImage(j, new Rectangle(0, 0, j.Width, j.Height));
 
-            }
+                    //    }
+
+                    //    Image newImage = Image.FromHbitmap(b.GetHbitmap());
+                    //    return newImage;
+                    //    //string file3 = @"C:\Users\stephen\test\test.gif";
+                    //    //newImage.Save(file3, System.Drawing.Imaging.ImageFormat.Gif);
+                    //}
+                //}
+
+            //}
         }
 
-        public static double ColourDistance(Color e1, Color e2)
+        public static double ColourDistance(MagickColor e1, MagickColor e2)
         {
+         
             long rmean = ((long)e1.R + (long)e2.R) / 2;
             long r = (long)e1.R - (long)e2.R;
             long g = (long)e1.G - (long)e2.G;
@@ -247,7 +326,7 @@ namespace Check_NOAA_Outlook
         public bool WasGood, WasSevere;
         public string EmailMessage;
         public SeveritiesEnum HowSevere;
-        public Dictionary<Guid, Bitmap> AttachedImages;
+        public Dictionary<Guid, MagickImage> AttachedImages;
         public Dictionary<int, SeveritiesEnum> Severities;
     }
 
@@ -258,8 +337,8 @@ namespace Check_NOAA_Outlook
         public string Title;
         public string GifName;
         public string MesoText;
-        public Bitmap MesoPicture;
-        public List<Point> Poly;
+        public MagickImage MesoPicture;
+        public List<System.Drawing.Point> Poly;
         public bool IsDownloaded;
         public Guid Id;
 
@@ -268,7 +347,7 @@ namespace Check_NOAA_Outlook
             this.Id = Guid.NewGuid();
         }
 
-        public bool IsPointInPolygon(Point point)
+        public bool IsPointInPolygon(System.Drawing.Point point)
         {
             if (Poly == null) throw new NullReferenceException("Poly must have a value before calling IsPointInPolygon");
             if (Poly.Count == 0) throw new InvalidOperationException("Poly count must be greater than 0");
@@ -333,7 +412,7 @@ namespace Check_NOAA_Outlook
             this.Reset = new System.Threading.ManualResetEvent(false);
         }
 
-        public Bitmap TheGif;
+        public MagickImage TheGif;
         public System.Threading.ManualResetEvent Reset;
         public bool Completed, IsThisForHTML, IsMesoDiscussion;
         public string HTML_Source;

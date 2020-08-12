@@ -1,0 +1,170 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Magick.NET-Q8-AnyCPU/7.21.1": {
+        "type": "package",
+        "dependencies": {
+          "Magick.NET.Core": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard20/Magick.NET-Q8-AnyCPU.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard20/Magick.NET-Q8-AnyCPU.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/Magick.Native-Q8-x64.dll.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-x64/native/Magick.Native-Q8-x64.dll.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-x64/native/Magick.Native-Q8-x64.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/Magick.Native-Q8-x86.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "Magick.NET.Core/4.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard20/Magick.NET.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard20/Magick.NET.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Magick.NET-Q8-AnyCPU/7.21.1": {
+      "sha512": "IniEHJgHSv4Q6TecYXIlPZEllcGOx3689v+uQRqMgOyVpxPpqyyDAy5qDvt/gJcmpGMqysAHmZrCstNaKSViSQ==",
+      "type": "package",
+      "path": "magick.net-q8-anycpu/7.21.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Copyright.txt",
+        "Magick.NET.icon.png",
+        "lib/net20/Magick.NET-Q8-AnyCPU.dll",
+        "lib/net20/Magick.NET-Q8-AnyCPU.xml",
+        "lib/net40/Magick.NET-Q8-AnyCPU.dll",
+        "lib/net40/Magick.NET-Q8-AnyCPU.xml",
+        "lib/netstandard13/Magick.NET-Q8-AnyCPU.dll",
+        "lib/netstandard13/Magick.NET-Q8-AnyCPU.xml",
+        "lib/netstandard20/Magick.NET-Q8-AnyCPU.dll",
+        "lib/netstandard20/Magick.NET-Q8-AnyCPU.xml",
+        "magick.net-q8-anycpu.7.21.1.nupkg.sha512",
+        "magick.net-q8-anycpu.nuspec",
+        "runtimes/linux-x64/native/Magick.Native-Q8-x64.dll.so",
+        "runtimes/osx-x64/native/Magick.Native-Q8-x64.dll.dylib",
+        "runtimes/win-x64/native/Magick.Native-Q8-x64.dll",
+        "runtimes/win-x86/native/Magick.Native-Q8-x86.dll"
+      ]
+    },
+    "Magick.NET.Core/4.1.0": {
+      "sha512": "khi7PLCXo3Cs6ooZ9eBixkgNa5umnfOBdzdqWtUS4McX/4EE5X/hG63VPkR36/FAy3dxzYfNdMOKI6gubK0DKw==",
+      "type": "package",
+      "path": "magick.net.core/4.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Copyright.txt",
+        "Magick.NET.icon.png",
+        "lib/net20/Magick.NET.Core.dll",
+        "lib/net20/Magick.NET.Core.xml",
+        "lib/net40/Magick.NET.Core.dll",
+        "lib/net40/Magick.NET.Core.xml",
+        "lib/netstandard13/Magick.NET.Core.dll",
+        "lib/netstandard13/Magick.NET.Core.xml",
+        "lib/netstandard20/Magick.NET.Core.dll",
+        "lib/netstandard20/Magick.NET.Core.xml",
+        "magick.net.core.4.1.0.nupkg.sha512",
+        "magick.net.core.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "Magick.NET-Q8-AnyCPU >= 7.21.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\stephen\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.1.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\stephen\\source\\repos\\Check_NOAA_Outlook\\Check_NOAA_Outlook\\Check_NOAA_Outlook.csproj",
+      "projectName": "Check_NOAA_Outlook",
+      "projectPath": "C:\\Users\\stephen\\source\\repos\\Check_NOAA_Outlook\\Check_NOAA_Outlook\\Check_NOAA_Outlook.csproj",
+      "packagesPath": "C:\\Users\\stephen\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\stephen\\source\\repos\\Check_NOAA_Outlook\\Check_NOAA_Outlook\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\stephen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "dependencies": {
+          "Magick.NET-Q8-AnyCPU": {
+            "target": "Package",
+            "version": "[7.21.1, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100-preview.7.20366.6\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "0": {
+  "Coordinates": "414, 381",
+  "Label": "Arlington",
+  "Email_Recipients": "someone@somewhere.local (Someone Smith);someone2@somewhere.local (Someone2 Smith)",
+  "Email_Recipients_BCC": null,
+  "Min_Severity" : 2,
+  "Min_Severity_For_Picture": null,
+  "MesoMap_Coordinates": "292, 259"
+  },
+  "1": {
+  "Coordinates": "543, 197",
+  "Label": "Chicago",
+  "Email_Recipients": "someone@somewhere.local (Someone Smith)",
+  "Email_Recipients_BCC": "someoneelse@somewhere.local (SomeoneElse Smith)",
+  "Min_Severity" : 2,
+  "Min_Severity_For_Picture": null,
+  "MesoMap_Coordinates": "382, 137"
+  },
+  "2": {
+  "Coordinates": "80, 55",
+  "Label": "Kirkland",
+  "Email_Recipients": "someone@somewhere.local (Someone Smith)",
+  "Email_Recipients_BCC": null,
+  "Min_Severity" : 1,
+  "Min_Severity_For_Picture": 1,
+  "MesoMap_Coordinates": "117, 69"
+  },
+  "3": {
+  "Coordinates": "445, 437",
+  "Label": "Houston",
+  "Email_Recipients": "someone@somewhere.local (Someone Smith)",
+  "Email_Recipients_BCC": null,
+  "Min_Severity" : 2,
+  "Min_Severity_For_Picture": null,
+  "MesoMap_Coordinates": "310, 296"
+  }
+}
