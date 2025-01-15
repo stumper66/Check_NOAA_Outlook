@@ -11,9 +11,9 @@ namespace Check_NOAA_Outlook
 {
     public class ComparisonAgainPrevResults
     {
-        public bool SeverityChangedFromPrev;
-        public int HighestSev;
-        public bool DayChanged;
+        public bool severityChangedFromPrev;
+        public int highestSev;
+        public bool dayChanged;
 
     }
     public class LocationsInfo
@@ -28,9 +28,9 @@ namespace Check_NOAA_Outlook
         public int? Min_Severity_For_Picture { get; set; }
 
         // fields not serialized:
-        public System.Drawing.Point Location, MesoMapLocation;
-        public string LocationId;
-        public bool CheckExtended;
+        public System.Drawing.Point location, mesoMapLocation;
+        public string locationId;
+        public bool checkExtended;
     }
 
     public class TrackingInfo
@@ -79,17 +79,17 @@ namespace Check_NOAA_Outlook
     {
         public PreviousResultsInfo() { }
 
-        public PreviousResultsInfo(string LocationId)
+        public PreviousResultsInfo(string locationId)
         {
-            this.LocationId = LocationId;
+            this.locationId = locationId;
         }
 
-        public string LocationId;
-        public DateTime? LastCheckTime;
-        public Dictionary<int, SeveritiesEnum> LastSeverities;
-        public Dictionary<int, SeveritiesEnum> Last2Severities;
-        public DateTime Last2SevsTime;
-        public List<string> Mesos;
+        public string locationId;
+        public DateTime? lastCheckTime;
+        public Dictionary<int, SeveritiesEnum> lastSeverities;
+        public Dictionary<int, SeveritiesEnum> last2Severities;
+        public DateTime last2SevsTime;
+        public List<string> mesos;
     }
     public class SevereCategoryValues
     {
@@ -106,69 +106,69 @@ namespace Check_NOAA_Outlook
             this.bm = bm;
             this.cities = cities;
             this.day48_legend = day48_legend;
-            this.IsDay48 = day48_legend != null;
+            this.isDay48 = day48_legend != null;
 
             InitializeStuff();
         }
 
         public void InitializeStuff()
         {
-            System.Drawing.Point[] Pts = new System.Drawing.Point[] {
+            System.Drawing.Point[] pts = [
                     new System.Drawing.Point(590, 530), // TSTM
                     new System.Drawing.Point(670, 530), // MRGL
                     new System.Drawing.Point(750, 530), // SLGT
                     new System.Drawing.Point(590, 547), // ENH
                     new System.Drawing.Point(670, 547), // MDT
                     new System.Drawing.Point(750, 547)  // HIGH
-                };
+                ];
 
 
-            IPixelCollection<byte> Pixels = bm.GetPixels();
-            TSTM = new MagickColor(Pixels[Pts[0].X, Pts[0].Y].ToColor());
-            MRGL = new MagickColor(Pixels[Pts[1].X, Pts[1].Y].ToColor());
-            SLGT = new MagickColor(Pixels[Pts[2].X, Pts[2].Y].ToColor());
-            ENH = new MagickColor(Pixels[Pts[3].X, Pts[3].Y].ToColor());
-            MDT = new MagickColor(Pixels[Pts[4].X, Pts[4].Y].ToColor());
-            HIGH = new MagickColor(Pixels[Pts[5].X, Pts[5].Y].ToColor());
-            Nothing = new MagickColor(255, 255, 255, 255);
+            IPixelCollection<byte> pixels = bm.GetPixels();
+            tstm = new MagickColor(pixels[pts[0].X, pts[0].Y].ToColor());
+            mrgl = new MagickColor(pixels[pts[1].X, pts[1].Y].ToColor());
+            slgt = new MagickColor(pixels[pts[2].X, pts[2].Y].ToColor());
+            enh = new MagickColor(pixels[pts[3].X, pts[3].Y].ToColor());
+            mdt = new MagickColor(pixels[pts[4].X, pts[4].Y].ToColor());
+            high = new MagickColor(pixels[pts[5].X, pts[5].Y].ToColor());
+            nothing = new MagickColor(255, 255, 255, 255);
 
-            ColorToSeverity = new()
+            colorToSeverity = new()
             {
-                { TSTM, SeveritiesEnum.TSTM },
-                { MRGL, SeveritiesEnum.MGRL },
-                { SLGT, SeveritiesEnum.SLGT },
-                { ENH, SeveritiesEnum.ENH },
-                { MDT, SeveritiesEnum.MDT },
-                { HIGH, SeveritiesEnum.HIGH },
-                { Nothing, SeveritiesEnum.Nothing },
-                { new MagickColor(Pixels[20, 20].ToColor()), SeveritiesEnum.Water },
-                { new MagickColor(Pixels[308, 36].ToColor()), SeveritiesEnum.Outside_US }
+                { tstm, SeveritiesEnum.TSTM },
+                { mrgl, SeveritiesEnum.MGRL },
+                { slgt, SeveritiesEnum.SLGT },
+                { enh, SeveritiesEnum.ENH },
+                { mdt, SeveritiesEnum.MDT },
+                { high, SeveritiesEnum.HIGH },
+                { nothing, SeveritiesEnum.Nothing },
+                { new MagickColor(pixels[20, 20].ToColor()), SeveritiesEnum.Water },
+                { new MagickColor(pixels[308, 36].ToColor()), SeveritiesEnum.Outside_US }
             };
 
-            if (this.IsDay48)
+            if (this.isDay48)
             {
 
             }
         }
 
-        public Dictionary<MagickColor, SeveritiesEnum> ColorToSeverity, m_ColorToSeverity2;
-        public MagickColor TSTM, MRGL, SLGT;
-        public MagickColor ENH, MDT, HIGH, Nothing;
+        public Dictionary<MagickColor, SeveritiesEnum> colorToSeverity, m_ColorToSeverity2;
+        public MagickColor tstm, mrgl, slgt;
+        public MagickColor enh, mdt, high, nothing;
         public MagickImage bm, cities, day48_legend;
-        public bool IsDay48;
-        private const double ColorTolerance = 5.0D;
+        public bool isDay48;
+        private const double colorTolerance = 5.0D;
 
-        public SeveritiesEnum WhatSeverityIsThis(System.Drawing.Point p, bool IsDay48)
+        public SeveritiesEnum WhatSeverityIsThis(System.Drawing.Point p, bool isDay48)
         {
-            if (IsDay48)
+            if (isDay48)
             {
 
             }
 
-            SeveritiesEnum HighestSev = SeveritiesEnum.Unknown;
+            SeveritiesEnum highestSev = SeveritiesEnum.Unknown;
 
-            int UseX = p.X;
-            int UseY = p.Y;
+            int useX = p.X;
+            int useY = p.Y;
 
             // compare against the passed point, but also compare against 4 other points
             // by moving 3 pixels in each direction to form a box
@@ -182,75 +182,76 @@ namespace Check_NOAA_Outlook
             //
             //       X       X
 
-            IPixelCollection<byte> Pixels = bm.GetPixels();
+            IPixelCollection<byte> pixels = bm.GetPixels();
             for (int i = 0; i < 5; i++)
             {
                 switch (i)
                 {
                     case 1:
-                        UseX -= 3; UseY -= 3; break;
+                        useX -= 3; useY -= 3; break;
                     case 2:
-                        UseX += 3; UseY -= 3; break;
+                        useX += 3; useY -= 3; break;
                     case 3:
-                        UseX -= 3; UseY += 3; break;
+                        useX -= 3; useY += 3; break;
                     case 4:
-                        UseX += 3; UseY += 3; break;
+                        useX += 3; useY += 3; break;
                 }
 
                 // TSTM = new MagickColor(Pixels[Pts[0].X, Pts[0].Y].ToColor());
-                MagickColor c = new(Pixels[UseX, UseY].ToColor());
+                MagickColor c = new(pixels[useX, useY].ToColor());
                 //Color c = bm.GetPixel(UseX, UseY);
 
-                foreach (MagickColor co in ColorToSeverity.Keys)
+                foreach (MagickColor co in colorToSeverity.Keys)
                 {
-                    double ColorDiff = ColourDistance(c, co);
-                    if (ColorDiff <= ColorTolerance && ColorToSeverity[co] > HighestSev)
-                        HighestSev = ColorToSeverity[co];
+                    double colorDiff = ColourDistance(c, co);
+                    if (colorDiff <= colorTolerance && colorToSeverity[co] > highestSev)
+                        highestSev = colorToSeverity[co];
                 }
             }
 
-            return HighestSev;
+            return highestSev;
         }
 
         public MagickImage GetCropOfMyArea(System.Drawing.Point p)
         {
-            const int XOffset = 150;
-            const int YOffset = 150;
+            const int xOffset = 150;
+            const int yOffset = 150;
 
-            MagickImage MyClone = CombineCities(this.bm);
+            MagickImage myClone = CombineCities(this.bm);
             //Bitmap MyClone = new Bitmap(this.bm);
-            System.Drawing.Rectangle rect = new(p.X - XOffset, p.Y - YOffset, XOffset * 2, YOffset * 2);
+            System.Drawing.Rectangle rect = new(p.X - xOffset, p.Y - yOffset, xOffset * 2, yOffset * 2);
 
             if (rect.X < 0) rect.X -= rect.X;
             if (rect.Y < 0) rect.Y -= rect.Y;
-            if (rect.Width + rect.X > MyClone.Width)
+            if (rect.Width + rect.X > myClone.Width)
             {
-                int Offset = rect.Width + rect.X - MyClone.Width;
-                rect.X -= Offset;
+                int offset = rect.Width + rect.X - (int)myClone.Width;
+                rect.X -= offset;
             }
-            if (rect.Height + rect.Y > MyClone.Height)
+            if (rect.Height + rect.Y > myClone.Height)
             {
-                int Offset = rect.Height + rect.Y - MyClone.Height;
-                rect.Y -= Offset;
+                int offset = rect.Height + rect.Y - (int)myClone.Height;
+                rect.Y -= offset;
             }
 
-            MagickGeometry g = new(rect.X, rect.Y, rect.Width, rect.Height);
-            MagickImage Crop = new(MyClone.Clone(g));
+            MagickGeometry g = new(rect.X, rect.Y, (uint)rect.Width, (uint)rect.Height);
+            //MagickImage crop = new(myClone.Clone(g));
+            MagickImage crop = new(myClone.CloneArea(g));
             //MagickImage Crop = MyClone.Clone(rect,
             //    System.Drawing.Imaging.PixelFormat.DontCare);
 
-            return Crop;
+            return crop;
         }
 
-        public MagickImage CombineCities(MagickImage OutlookBitmap)
+        public MagickImage CombineCities(MagickImage outlookBitmap)
         {
-            MagickImage i = new(OutlookBitmap.Clone());
+            MagickImage i = new(outlookBitmap.Clone());
 
-            MagickImageCollection col = new()
-            {
+            MagickImageCollection col =
+            [
                 i,
                 cities
-            };
+            ];
             return new MagickImage(col.Mosaic());
         }
 
@@ -269,39 +270,39 @@ namespace Check_NOAA_Outlook
     {
         public OutlookResults() { }
 
-        public SeverityChangesEnum SeverityKind = SeverityChangesEnum.NA;
-        public bool WasGood, WasSevere;
-        public string EmailMessage;
-        public SeveritiesEnum HowSevere;
-        public Dictionary<Guid, MagickImage> AttachedImages;
-        public Dictionary<int, SeveritiesEnum> Severities;
+        public SeverityChangesEnum severityKind = SeverityChangesEnum.NA;
+        public bool wasGood, wasSevere;
+        public string emailMessage;
+        public SeveritiesEnum howSevere;
+        public Dictionary<Guid, MagickImage> attachedImages;
+        public Dictionary<int, SeveritiesEnum> severities;
     }
 
     public class MesoDiscussionDetails
     {
-        public string Filename;
-        public string PolyCoords;
-        public string Title;
-        public string GifName;
-        public string MesoText;
-        public MagickImage MesoPicture;
-        public List<System.Drawing.Point> Poly;
-        public bool IsDownloaded;
-        public Guid Id;
+        public string filename;
+        public string polyCoords;
+        public string title;
+        public string gifName;
+        public string mesoText;
+        public MagickImage mesoPicture;
+        public List<System.Drawing.Point> poly;
+        public bool isDownloaded;
+        public Guid id;
 
         public MesoDiscussionDetails()
         {
-            this.Id = Guid.NewGuid();
+            this.id = Guid.NewGuid();
         }
 
         public bool IsPointInPolygon(System.Drawing.Point point)
         {
-            if (Poly == null) throw new NullReferenceException("Poly must have a value before calling IsPointInPolygon");
-            if (Poly.Count == 0) throw new InvalidOperationException("Poly count must be greater than 0");
+            if (poly == null) throw new NullReferenceException("Poly must have a value before calling IsPointInPolygon");
+            if (poly.Count == 0) throw new InvalidOperationException("Poly count must be greater than 0");
 
             var intersects = new List<int>();
-            var a = Poly.Last();
-            foreach (var b in Poly)
+            var a = poly.Last();
+            foreach (var b in poly)
             {
                 if (b.X == point.X && b.Y == point.Y)
                 {
@@ -356,13 +357,13 @@ namespace Check_NOAA_Outlook
     {
         public DownloadedImageClass()
         {
-            this.Reset = new System.Threading.ManualResetEvent(false);
+            this.reset = new System.Threading.ManualResetEvent(false);
         }
 
-        public MagickImage TheGif;
-        public System.Threading.ManualResetEvent Reset;
-        public bool Completed, IsThisForHTML, IsMesoDiscussion;
-        public string HTML_Source;
-        public byte[] Results;
+        public MagickImage theGif;
+        public System.Threading.ManualResetEvent reset;
+        public bool completed, isThisForHTML, isMesoDiscussion;
+        public string htmlSource;
+        public byte[] results;
     }
 }
